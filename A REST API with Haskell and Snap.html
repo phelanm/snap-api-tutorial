@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html class="wf-callunasans-i4-active wf-callunasans-i7-active wf-callunasans-n4-active wf-callunasans-n6-active wf-callunasans-n7-active wf-courierprime-i4-active wf-courierprime-i7-active wf-courierprime-n4-active wf-courierprime-n7-active wf-freighttextpro-i4-active wf-freighttextpro-i7-active wf-freighttextpro-n4-active wf-freighttextpro-n7-active wf-active"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<meta content="NOODP" name="robots">
+<meta content="Use Haskell and Snap to build a RESTful API." name="description">
+<link href="https://github.com/sidraval" rel="author">
+
+<meta content="summary" name="twitter:card">
+<meta content="@thoughtbot" name="twitter:site">
+<meta content="https://robots.thoughtbot.com/a-rest-api-with-haskell-and-snap" name="twitter:url">
+<meta content="A REST API with Haskell and Snap" name="twitter:title">
+<meta content="Use Haskell and Snap to build a RESTful API." name="twitter:description">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://robots.thoughtbot.com/assets/favicon-f2dbb21c91d2db85a5cb89a59e2b72cca851b16f03caffad1f8375cb8e957e0a.ico">
+<link rel="apple-touch-icon" type="image/x-icon" href="https://robots.thoughtbot.com/assets/apple-touch-icon-f5660bd740993647d20c17d16b3fae2697e73d818752f2d4f3045e49d8b80153.png">
+<title>A REST API with Haskell and Snap</title>
+<link rel="stylesheet" media="all" href="A%20REST%20API%20with%20Haskell%20and%20Snap_files/application-0d736de18fc5053701a521d941b05b861f94893fd981eee8.css">
+
+<link href="feed://feeds.feedburner.com/GiantRobotsSmashingIntoOtherGiantRobots" rel="alternate" type="application/rss+xml">
+<script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/analytics.js" async="" type="text/javascript"></script><script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/analytics_002.js" async="" type="text/javascript"></script><script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/loq1vxq.js"></script>
+<style type="text/css">.tk-calluna-sans{font-family:"calluna-sans",sans-serif;}.tk-freight-text-pro{font-family:"freight-text-pro",sans-serif;}.tk-courier-prime{font-family:"courier-prime",monospace;}</style><link media="all" href="A%20REST%20API%20with%20Haskell%20and%20Snap_files/l.css" rel="stylesheet"><script>try{Typekit.load();}catch(e){}</script>
+
+</head>
+<body>
+<nav class="main">
+<a class="logo" href="https://robots.thoughtbot.com/"></a>
+<ul class="topic-nav">
+<li class="topic-nav-item">
+<a href="https://robots.thoughtbot.com/tags">All Topics</a>
+</li>
+<li class="topic-nav-item">
+<a href="https://robots.thoughtbot.com/design">Design</a>
+</li>
+<li class="topic-nav-item">
+<a href="https://robots.thoughtbot.com/web">Web</a>
+</li>
+<li class="topic-nav-item">
+<a href="https://robots.thoughtbot.com/ios">iOS</a>
+</li>
+<li class="topic-nav-item">
+<a href="https://robots.thoughtbot.com/android">Android</a>
+</li>
+</ul>
+</nav>
+
+
+<section class="container">
+<section id="posts">
+
+<article class="post text" data-url="/a-rest-api-with-haskell-and-snap" role="main">
+<header>
+<h1 class="title">A REST API with Haskell and Snap</h1>
+<div class="meta">
+<div class="meta-author">
+<a href="https://github.com/sidraval">Sid Raval</a>
+</div>
+<time class="meta-date" datetime="2015-03-04T00:00:00+00:00">
+March 04, 2015
+</time>
+<ul class="meta-tag-list">
+<li class="meta-tag-item">
+<a href="https://robots.thoughtbot.com/tags/web">web</a>
+</li>
+<li class="meta-tag-item">
+<a href="https://robots.thoughtbot.com/tags/snap">snap</a>
+</li>
+<li class="meta-tag-item">
+<a href="https://robots.thoughtbot.com/tags/haskell">haskell</a>
+</li>
+</ul>
+
+</div>
+
+</header>
+<div style="position: relative;" class="post-body"><div class="carnival"></div>
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="BawBaw" id="BawBaw-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="BawBaw">Building a web application in Haskell may seem like a daunting task, but it
+doesn’t have to be: thanks to the authors of the <a href="http://www.snapframework.com/">Snap Framework</a>, web
+development in Haskell can be fun and eye-opening! Let’s build a simple RESTful
+JSON API using Snap.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="MfwMfw" id="MfwMfw-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="MfwMfw">Moderate familiarity with the Haskell language is assumed – this guide will not
+go through basic Haskell syntax or setup, and you’re expected to look at
+documentation while reading this guide.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="TcsIrg" id="TcsIrg-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TcsIrg">The code snippets start with a comment that notes what file they’re editing.
+Each snippet only shows the added lines to that file. I recommend glancing at
+each file while reading the snippet, so the previously defined values are
+apparent.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="HoaHoa" id="HoaHoa-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="HoaHoa">Hover over any linked function to see it’s type signature.</p>
+<h2 id="getting-set-up">
+  <a href="#getting-set-up" class="heading-link">
+    Getting set up
+  </a>
+</h2>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="WmaRtf" id="WmaRtf-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="WmaRtf">We’ve made a <a href="https://www.github.com/thoughtbot/snap-api-tutorial">git repository</a> that you can clone, so we’re
+starting off on the same page. For reference, the author is using Cabal v1.22.0.0
+and GHC v7.8.4. Run the following:</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="gcggcg" id="gcggcg-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="gcggcg"><code class="bash hljs">git <span class="built_in">clone</span> git@github.com:thoughtbot/snap-api-tutorial.git
+<span class="built_in">cd</span> snap-api-tutorial
+git checkout baseline
+cabal sandbox init
+cabal install snap
+cabal install --dependencies-only
+</code></pre>
+<h2 id="the-api-snaplet">
+  <a href="#the-api-snaplet" class="heading-link">
+    The API snaplet
+  </a>
+</h2>
+
+<div class="carnival-comment-indicator" data-indicator-for="AsiIiy" id="AsiIiy-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="AsiIiy">A snaplet is a composable piece of a Snap application. Snap applications are
+built by nesting snaplets. Indeed, if you take a peek at <code>Application.hs</code>
+you’ll see the application initializer <code>app</code> is itself the result of a
+<a href="http://hackage.haskell.org/package/snap-0.6.0/docs/Snap-Snaplet.html#v:makeSnaplet" title="makeSnaplet :: Text -&gt; Text -&gt; Maybe (IO FilePath) -&gt; Initializer b v v -&gt; SnapletInit b v"><code>makeSnaplet</code></a> function.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="WgtTwd" id="WgtTwd-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="WgtTwd">We’re going to build our own snaplet called <code>Api</code>. This snaplet will be
+responsible for our top level <code>/api</code> namespace.  We’ll set a couple language
+extensions, import required modules, and define our <code>Api</code> datatype. Then we’ll
+define the initializer for our snaplet.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="nfsnfs" id="nfsnfs-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="nfsnfs"><code class="haskell hljs"><span class="comment">-- new file: src/api/Core.hs</span>
+
+<span class="meta">{-# LANGUAGE OverloadedStrings #-}</span>
+
+<span class="keyword">module</span> Api.Core <span class="keyword">where</span>
+
+<span class="keyword">import</span> Snap.Snaplet
+
+<span class="class"><span class="keyword">data</span> <span class="type">Api</span> = <span class="type">Api</span></span>
+
+<span class="title">apiInit</span> :: <span class="type">SnapletInit</span> b <span class="type">Api</span>
+<span class="title">apiInit</span> = makeSnaplet <span class="string">"api"</span> <span class="string">"Core Api"</span> <span class="type">Nothing</span> $ return <span class="type">Api</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="NttTit" id="NttTit-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NttTit">Note that the type <code>apiInit :: SnapletInit b Api</code> could have been
+<code>apiInit :: SnapletInit App Api</code>. By using <code>b</code> instead of <code>App</code>, we’re telling
+Snap that our <code>Api</code> snaplet can be nested in <em>any</em> base application, not just
+<code>App</code>. This is the root of snaplet composability.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="RnoWbb" id="RnoWbb-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="RnoWbb">Right now our snaplet exists in isolation – we haven’t nested it within
+our top level application. We’ll begin by telling our <code>App</code> datatype to expect
+an <code>Api</code> snaplet:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="sAAsAA" id="sAAsAA-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="sAAsAA"><code class="haskell hljs"><span class="comment">-- src/Application.hs</span>
+
+<span class="keyword">import</span> Api.Core (<span class="type">Api(Api)</span>)
+
+<span class="class"><span class="keyword">data</span> <span class="type">App</span> = <span class="type">App</span> { <span class="title">_api</span> :: <span class="type">Snaplet</span> <span class="type">Api</span> }</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="TwnTwn" id="TwnTwn-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TwnTwn">Then, we’ll nest our <code>Api</code> snaplet within our <code>App</code> snaplet, using
+<a href="http://hackage.haskell.org/package/snap-0.6.0/docs/Snap-Snaplet.html#v:nestSnaplet" title="nestSnaplet :: ByteString -&gt; Lens v (Snaplet v1) -&gt; SnapletInit b v1 -&gt; Initializer b v (Snaplet v1)"><code>nestSnaplet</code></a>:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="nBLnBL" id="nBLnBL-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="nBLnBL"><code class="haskell hljs"><span class="title">nestSnaplet</span> :: <span class="type">ByteString</span> -&gt; <span class="type">Lens</span> v (<span class="type">Snaplet</span> v1) -&gt; <span class="type">SnapletInit</span> b v1 -&gt; <span class="type">Initializer</span> b v (<span class="type">Snaplet</span> v1)
+</code></pre>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="TfaPit" id="TfaPit-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TfaPit">The first argument is a root base url for the snaplet’s routes, <code>/api</code> in our
+case. The second argument is a <code>Lens</code> identifying our snaplet, generated by the
+<code>makeLenses</code> function in <code>src/Application.hs</code>. The last argument is the snaplet
+initializer function <code>apiInit</code> we defined previously. Putting it to use:</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="sAANda" id="sAANda-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="sAANda"><code class="haskell hljs"><span class="comment">-- src/Site.hs</span>
+
+<span class="keyword">import</span> Api.Core (<span class="type">Api(Api)</span>, <span class="title">apiInit</span>)
+
+<span class="title">app</span> :: <span class="type">SnapletInit</span> <span class="type">App</span> <span class="type">App</span>
+<span class="title">app</span> = makeSnaplet <span class="string">"app"</span> <span class="string">"An snaplet example application."</span> <span class="type">Nothing</span> $ <span class="keyword">do</span>
+    api &lt;- nestSnaplet <span class="string">"api"</span> api apiInit
+    addRoutes routes
+    return $ <span class="type">App</span> api
+</code></pre>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="OswWaa" id="OswWaa-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="OswWaa">Ok, so we’ve nested our <code>Api</code> snaplet. But since it has no routes, we can’t
+actually see it in action. We’ll add a <code>/api/status</code> route that always responds
+with a <code>200 OK</code>.</p>
+
+<div style="opacity: 0;" class="carnival-comment-indicator" data-indicator-for="SrhTwd" id="SrhTwd-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="SrhTwd">Snap route handlers generally return a type of <code>Handler b v ()</code>. The
+<a href="http://hackage.haskell.org/package/snap-0.6.0/docs/Snap-Snaplet.html#t:Handler"><code>Handler</code></a> monad is an instance of <a href="http://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#t:MonadSnap"><code>MonadSnap</code></a>, which
+gives us stateful access to the HTTP request and response. All of our request
+and response modification and processing will take place inside a <code>Handler</code>
+monad. Thus, we’ll define <code>respondOk :: Handler b Api ()</code>:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="sSqsSq" id="sSqsSq-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="sSqsSq"><code class="haskell hljs"><span class="comment">-- src/api/Core.hs</span>
+
+<span class="keyword">import</span>           Snap.Core
+<span class="keyword">import</span> <span class="keyword">qualified</span> Data.ByteString.Char8 <span class="keyword">as</span> B
+
+<span class="title">apiRoutes</span> :: [(<span class="type">B</span>.<span class="type">ByteString</span>, <span class="type">Handler</span> b <span class="type">Api</span> ())]
+<span class="title">apiRoutes</span> = [(<span class="string">"status"</span>, method <span class="type">GET</span> respondOk)]
+
+<span class="title">respondOk</span> :: <span class="type">Handler</span> b <span class="type">Api</span> ()
+<span class="title">respondOk</span> = modifyResponse $ setResponseCode <span class="number">200</span>
+
+<span class="title">apiInit</span> :: <span class="type">SnapletInit</span> b <span class="type">Api</span>
+<span class="title">apiInit</span> = makeSnaplet <span class="string">"api"</span> <span class="string">"Core Api"</span> <span class="type">Nothing</span> $ <span class="keyword">do</span>
+        addRoutes apiRoutes
+        return <span class="type">Api</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="NllNll" id="NllNll-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NllNll">Now, let’s look at the type signatures for <a href="https://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#v:modifyResponse" title="modifyResponse :: (MonadSnap m) =&gt; (Response -&gt; Response) -&gt; m ()"><code>modifyResponse</code></a>
+and <a href="https://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#v:setResponseCode" title="setResponseCode :: Int -&gt; Response -&gt; Response"><code>setResponseCode</code></a>:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="mMmmMm" id="mMmmMm-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="mMmmMm"><code class="haskell hljs"><span class="title">modifyResponse</span> :: (<span class="type">MonadSnap</span> m) =&gt; (<span class="type">Response</span> -&gt; <span class="type">Response</span>) -&gt; m ()
+<span class="title">setResponseCode</span> :: <span class="type">Int</span> -&gt; <span class="type">Response</span> -&gt; <span class="type">Response</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="Tismwp" id="Tismwp-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="Tismwp">That is, <code>setResponseCode</code> takes an integer and returns a <code>Response</code>
+modifying function that we can then pass into <code>modifyResponse</code>. <code>modifyResponse</code>
+will perform the response modification within our <code>Handler</code> monad.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="NttNtt" id="NttNtt-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NttNtt">Now try the following:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="crpOS." id="crpOS.-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="crpOS."><code class="bash hljs">$ cabal run -- -p 9000
+$ curl -I -XGET <span class="string">"localhost:9000/api/status"</span>
+
+HTTP/1.1 200 OK
+Server: Snap 0.9.4.6
+Date: ...
+Transfer-Encoding: chunked
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="YOfYOf" id="YOfYOf-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="YOfYOf">Yay! Our first response.</p>
+<h2 id="the-todo-data-type">
+  <a href="#the-todo-data-type" class="heading-link">
+    The todo data type
+  </a>
+</h2>
+
+<div class="carnival-comment-indicator" data-indicator-for="NwcFod" id="NwcFod-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NwcFod">Next we’ll create a <code>Todo</code> data type, and provide instances that allow
+it to be deserialized out of a row in PostgreSQL, and serialized into JSON for
+our response. First, our data type and instances:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="TFtTFt" id="TFtTFt-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TFtTFt">The <a href="https://hackage.haskell.org/package/postgresql-simple-0.4.10.0/docs/Database-PostgreSQL-Simple-FromRow.html"><code>FromRow</code></a> typeclass will allow us to define <a href="https://hackage.haskell.org/package/postgresql-simple-0.4.10.0/docs/Database-PostgreSQL-Simple-FromRow.html#v:field" title="fromRow :: RowParser a"><code>fromRow</code></a>, which
+deserializes rows from PostgreSQL into <code>Todo</code> data structures.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="TTtTtc" id="TTtTtc-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TTtTtc">The <a href="https://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson.html#t:ToJSON"><code>ToJSON</code></a> typeclass will allow us to define <a href="https://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson.html#v:toJSON" title="toJSON :: a -&gt; Value"><code>toJSON</code></a>, which
+serializes our <code>Todo</code> data structure into a <a href="https://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson.html#t:Value"><code>Value</code></a> type. This type can
+then be converted to JSON via the <a href="https://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson-Generic.html#t:encode" title="encode :: Data a =&gt; a -&gt; ByteString"><code>encode</code></a> function.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="nfst" id="nfst-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="nfst"><code class="haskell hljs"><span class="comment">-- new file: src/api/Types.hs</span>
+
+<span class="meta">{-# LANGUAGE OverloadedStrings #-}</span>
+<span class="meta">{-# LANGUAGE FlexibleInstances #-}</span>
+
+<span class="keyword">module</span> Api.Types <span class="keyword">where</span>
+
+<span class="keyword">import</span>           Control.Applicative
+<span class="keyword">import</span> <span class="keyword">qualified</span> Data.Text <span class="keyword">as</span> T
+<span class="keyword">import</span>           Data.Aeson (<span class="type">ToJSON(toJSON)</span>, <span class="title">object</span>, (.=))
+<span class="keyword">import</span>           Snap.Snaplet.PostgresqlSimple
+
+<span class="class"><span class="keyword">data</span> <span class="type">Todo</span> = <span class="type">Todo</span></span>
+  { todoId   :: <span class="type">Int</span>
+  , todoText :: <span class="type">T</span>.<span class="type">Text</span>
+  }
+<span class="class">
+<span class="keyword">instance</span> <span class="type">FromRow</span> <span class="type">Todo</span> <span class="keyword">where</span></span>
+  fromRow = <span class="type">Todo</span> &lt;$&gt; field
+                 &lt;*&gt; field
+<span class="class">
+<span class="keyword">instance</span> <span class="type">ToJSON</span> <span class="type">Todo</span> <span class="keyword">where</span></span>
+   toJSON (<span class="type">Todo</span> id text) = object [ <span class="string">"id"</span> .= id, <span class="string">"text"</span> .= text ]
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="IftIft" id="IftIft-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="IftIft">In <code>fromRow</code>, the number of calls to <code>field</code> should match the number of columns
+returned in the SQL query you intend to call to retrieve the data.</p>
+<h2 id="the-todo-snaplet">
+  <a href="#the-todo-snaplet" class="heading-link">
+    The todo snaplet
+  </a>
+</h2>
+
+<div class="carnival-comment-indicator" data-indicator-for="NwbWte" id="NwbWte-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NwbWte">Next, we’ll be nesting a <code>Todo</code> snaplet inside our <code>Api</code> snaplet. We’ll then
+establish a database connection, and write <code>GET</code> and <code>POST</code> handlers for
+<code>/api/todos</code>, allowing us to create a new todo item, and fetch all todo items.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="WswWsw" id="WswWsw-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="WswWsw">We’ll start with the boilerplate, as before – defining our snaplet, then
+nesting it inside our <code>Api</code> snaplet:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="nfsnfs" id="nfsnfs-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="nfsnfs"><code class="haskell hljs"><span class="comment">-- new file: src/api/services/TodoService.hs</span>
+
+<span class="meta">{-# LANGUAGE OverloadedStrings #-}</span>
+
+<span class="keyword">module</span> Api.Services.TodoService <span class="keyword">where</span>
+
+<span class="keyword">import</span> Api.Types (<span class="type">Todo(Todo)</span>)
+<span class="keyword">import</span> Control.Lens (<span class="title">makeLenses</span>)
+<span class="keyword">import</span> Snap.Core
+<span class="keyword">import</span> Snap.Snaplet
+
+<span class="class"><span class="keyword">data</span> <span class="type">TodoService</span> = <span class="type">TodoService</span></span>
+
+<span class="title">todoServiceInit</span> :: <span class="type">SnapletInit</span> b <span class="type">TodoService</span>
+<span class="title">todoServiceInit</span> = makeSnaplet <span class="string">"todos"</span> <span class="string">"Todo Service"</span> <span class="type">Nothing</span> $ return <span class="type">TodoService</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="sLTsLT" id="sLTsLT-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="sLTsLT"><code class="haskell hljs"><span class="comment">-- src/api/Core.hs</span>
+
+<span class="meta">{-# LANGUAGE TemplateHaskell #-}</span>
+
+<span class="keyword">import</span> Control.Lens (<span class="title">makeLenses</span>)
+<span class="keyword">import</span> Api.Services.TodoService(<span class="type">TodoService(TodoService)</span>, <span class="title">todoServiceInit</span>)
+<span class="comment">-- ...</span>
+
+<span class="class"><span class="keyword">data</span> <span class="type">Api</span> = <span class="type">Api</span> { <span class="title">_todoService</span> :: <span class="type">Snaplet</span> <span class="type">TodoService</span> }</span>
+
+<span class="title">makeLenses</span> ''<span class="type">Api</span>
+<span class="comment">-- ...</span>
+
+<span class="title">apiInit</span> :: <span class="type">SnapletInit</span> b <span class="type">Api</span>
+<span class="title">apiInit</span> = makeSnaplet <span class="string">"api"</span> <span class="string">"Core Api"</span> <span class="type">Nothing</span> $ <span class="keyword">do</span>
+  ts &lt;- nestSnaplet <span class="string">"todos"</span> todoService todoServiceInit
+  addRoutes apiRoutes
+  return $ <span class="type">Api</span> ts
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="NnhWai" id="NnhWai-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NnhWai">Nothing new here. Now we’ll nest a PostgreSQL snaplet, provided by
+<a href="https://hackage.haskell.org/package/snaplet-postgresql-simple-0.6/docs/Snap-Snaplet-PostgresqlSimple.html"><code>snaplet-postgresql-simple</code></a>, into our <code>TodoService</code>. This will
+provide the <code>TodoService</code> with a connection to a database, and allow us to query
+it. We’ll also import Aeson, so we can encode our responses as JSON using the
+<code>ToJSON</code> instance we defined before.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="sLTsLT" id="sLTsLT-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="sLTsLT"><code class="haskell hljs"><span class="comment">-- src/api/services/TodoService.hs</span>
+
+<span class="meta">{-# LANGUAGE TemplateHaskell -#}
+{-# LANGUAGE FlexibleInstances -#}
+
+import Control.Lens (makeLenses)
+import Control.Monad.State.Class (get)
+import Data.Aeson (encode)
+import Snap.Snaplet.PostgresqlSimple
+import qualified Data.ByteString.Char8 as B
+-- ...
+
+data TodoService = TodoService { _pg :: Snaplet Postgres }
+
+makeLenses ''TodoService
+-- ...
+
+todoServiceInit :: SnapletInit b TodoService
+todoServiceInit = makeSnaplet "todos" "Todo Service" Nothing $ do
+  pg &lt;- nestSnaplet "pg" pg pgsInit
+  return $ TodoService pg
+
+instance HasPostgres (Handler b TodoService) where
+  getPostgresState = with pg get
+</span></code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="THiTHi" id="THiTHi-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="THiTHi">The <code>HasPostgres</code> instance just gives our code some brevity, you can read about
+it <a href="https://hackage.haskell.org/package/snaplet-postgresql-simple-0.6/docs/Snap-Snaplet-PostgresqlSimple.html">here</a>.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="AboAbo" id="AboAbo-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="AboAbo">A bit of SQL to set up our database and insert a couple rows of test data:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="CDsCDs" id="CDsCDs-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="CDsCDs"><code class="SQL hljs"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> snaptutorial;
+<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> todos (<span class="keyword">id</span> <span class="built_in">SERIAL</span>, <span class="built_in">text</span> <span class="built_in">TEXT</span>);
+<span class="keyword">INSERT</span> <span class="keyword">INTO</span> todos (<span class="built_in">text</span>) <span class="keyword">VALUES</span> (<span class="string">'First todo'</span>);
+<span class="keyword">INSERT</span> <span class="keyword">INTO</span> todos (<span class="built_in">text</span>) <span class="keyword">VALUES</span> (<span class="string">'Second todo'</span>);
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="TpcTpc" id="TpcTpc-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TpcTpc">Then, provide configuration to the postgres snaplet by editing the following
+file appropiately:
+<code>snaplets/api/snaplets/todos/snaplets/postgresql-simple/devel.cfg</code>.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="WnrWfa" id="WnrWfa-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="WnrWfa">We’re now ready for our first <code>GET</code> to <code>/api/todos</code>. We’ll fetch all the rows of
+the todos table, convert them into <code>Todo</code> data, and then serialize them as JSON
+for our response.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="TrtTrt" id="TrtTrt-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TrtTrt">To retreive the data, we use the <a href="https://hackage.haskell.org/package/snaplet-postgresql-simple-0.6/docs/Snap-Snaplet-PostgresqlSimple.html#v:query_" title="query_ :: (HasPostgres m, FromRow r) =&gt; Query -&gt; m [r]"><code>query_</code></a> function, which takes a SQL
+string and returns a (monadic) array of data that implement the <code>FromRow</code>
+typeclass:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="qHmqHm" id="qHmqHm-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="qHmqHm"><code class="haskell hljs"><span class="title">query_</span> :: (<span class="type">HasPostgres</span> m, <span class="type">FromRow</span> r) =&gt; <span class="type">Query</span> -&gt; m [r]
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="TwuTwu" id="TwuTwu-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TwuTwu">Then, we’ll use <a href="http://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#v:writeLBS" title="writeLBS :: MonadSnap m =&gt; ByteString -&gt; m ()"><code>writeLBS</code></a> in conjunction with the previously
+mentioned <a href="https://hackage.haskell.org/package/aeson-0.6.1.0/docs/Data-Aeson-Generic.html#t:encode" title="encode :: Data a =&gt; a -&gt; ByteString"><code>encode</code></a> function to write a JSON string to the response
+body:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="wMmwMm" id="wMmwMm-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="wMmwMm"><code class="haskell hljs"><span class="title">writeLBS</span> :: <span class="type">MonadSnap</span> m =&gt; <span class="type">ByteString</span> -&gt; m ()
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="UthUth" id="UthUth-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="UthUth"><a href="http://hackage.haskell.org/package/snap-core-0.9.4.0/docs/src/Snap-Internal-Types.html#writeLBS">Under the hood</a>, this function calls out to a function that
+calls the <a href="https://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#v:modifyResponse" title="modifyResponse :: (MonadSnap m) =&gt; (Response -&gt; Response) -&gt; m ()"><code>modifyResponse</code></a> function we saw earlier.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="PtiPti" id="PtiPti-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="PtiPti">Put together, it looks like this:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="s.BetT" id="s.BetT-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="s.BetT"><code class="haskell hljs"><span class="comment">-- src/api/services/TodoService.hs</span>
+
+<span class="comment">-- ...</span>
+<span class="title">todoRoutes</span> :: [(<span class="type">B</span>.<span class="type">ByteString</span>, <span class="type">Handler</span> b <span class="type">TodoService</span> ())]
+<span class="title">todoRoutes</span> = [(<span class="string">"/"</span>, method <span class="type">GET</span> getTodos)]
+
+<span class="title">getTodos</span> :: <span class="type">Handler</span> b <span class="type">TodoService</span> ()
+<span class="title">getTodos</span> = <span class="keyword">do</span>
+  todos &lt;- query_ <span class="string">"SELECT * FROM todos"</span>
+  modifyResponse $ setHeader <span class="string">"Content-Type"</span> <span class="string">"application/json"</span>
+  writeLBS . encode $ (todos :: [<span class="type">Todo</span>])
+
+<span class="title">todoServiceInit</span> :: <span class="type">SnapletInit</span> b <span class="type">TodoService</span>
+<span class="title">todoServiceInit</span> = makeSnaplet <span class="string">"todos"</span> <span class="string">"Todo Service"</span> <span class="type">Nothing</span> $ <span class="keyword">do</span>
+  pg &lt;- nestSnaplet <span class="string">"pg"</span> pg pgsInit
+  addRoutes todoRoutes
+  return $ <span class="type">TodoService</span> pg
+<span class="comment">-- ...</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="AwsV" id="AwsV-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="AwsV">Additionally, we set  the <code>Content-Type</code> header so browsers know we are sending
+back JSON. Voila:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="crpcrp" id="crpcrp-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="crpcrp"><code class="bash hljs">$ cabal run -- -p 9000
+$ curl -XGET localhost:9000/api/todos
+
+[{<span class="string">"text"</span>:<span class="string">"First todo"</span>,<span class="string">"id"</span>:1}, {<span class="string">"text"</span>:<span class="string">"Second todo"</span>,<span class="string">"id"</span>:2}]
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="NtcTwr" id="NtcTwr-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="NtcTwr">Now, to create data, we’ll write a handler for a <code>POST</code> to <code>/api/todos</code>. This
+time, we’ll get parameters from our request body, and insert them into our
+database. Then we’ll respond with a <code>201 CREATED</code>.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="TtwTtw" id="TtwTtw-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TtwTtw">This time, we’ll get data from the POST request body via <a href="https://hackage.haskell.org/package/snap-core-0.9.4.0/docs/Snap-Core.html#v:getPostParam" title="getPostParam :: MonadSnap m =&gt; ByteString -&gt; m (Maybe ByteString)"><code>getPostParam</code></a>:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="gMmgMm" id="gMmgMm-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="gMmgMm"><code class="haskell hljs"><span class="title">getPostParam</span> :: <span class="type">MonadSnap</span> m =&gt; <span class="type">ByteString</span> -&gt; m (<span class="type">Maybe</span> <span class="type">ByteString</span>)
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="TueTue" id="TueTue-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="TueTue">Then use <a href="https://hackage.haskell.org/package/snaplet-postgresql-simple-0.6/docs/Snap-Snaplet-PostgresqlSimple.html#v:execute" title="execute :: (HasPostgres m, ToRow q) =&gt; Query -&gt; q -&gt; m Int64"><code>execute</code></a> (which is the database modifying counterpart to
+<code>query</code>) to insert the data acquired via <code>getPostParam</code> into the database:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="tBHtBH" id="tBHtBH-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="tBHtBH"><code class="haskell hljs"><span class="title">todoRoutes</span> :: [(<span class="type">B</span>.<span class="type">ByteString</span>, <span class="type">Handler</span> b <span class="type">TodoService</span> ())]
+<span class="title">todoRoutes</span> = [(<span class="string">"/"</span>, method <span class="type">GET</span> getTodos)
+             ,(<span class="string">"/"</span>, method <span class="type">POST</span> createTodo)]
+
+<span class="title">createTodo</span> :: <span class="type">Handler</span> b <span class="type">TodoService</span> ()
+<span class="title">createTodo</span> = <span class="keyword">do</span>
+  todoTextParam &lt;- getPostParam <span class="string">"text"</span>
+  newTodo &lt;- execute <span class="string">"INSERT INTO todos (text) VALUES (?)"</span> (<span class="type">Only</span> todoTextParam)
+  modifyResponse $ setResponseCode <span class="number">201</span>
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="HtOHtO" id="HtOHtO-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="HtOHtO">Here, the <a href="https://hackage.haskell.org/package/postgresql-simple-0.4.9.0/docs/Database-PostgreSQL-Simple.html#t:Only"><code>Only</code></a> is postgresql-simple’s version of single value collections.</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="VV" id="VV-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="VV">Voila:</p>
+
+<div class="carnival-comment-indicator" data-indicator-for="crpCS." id="crpCS.-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><pre id="crpCS."><code class="bash hljs">$ cabal run -- -p 9000
+$ curl -i -XPOST --data <span class="string">"text=Third todo"</span> <span class="string">"localhost:9000/api/todos"</span>
+
+HTTP/1.1 201 Created
+Server: Snap 0.9.4.6
+Date: ...
+Transfer-Encoding: chunked
+
+$ psql snaptutorial
+$ SELECT * FROM todos;
+
+ id |     text
+----+--------------
+  1 | First todo
+  2 | Second todo
+  3 | Third todo
+</code></pre>
+
+<div class="carnival-comment-indicator" data-indicator-for="AswAsw" id="AswAsw-indicator"><span class="carnival-count">+</span><svg><path d="M0.848275862,0 C0.38,0 0,0.508615385 0,1.13538462 L0,18.4006154 C0,19.0273846 0.38,19.536 0.848275862,19.536 L4.16896552,19.536 L4.16896552,22.8 C4.16896552,23.6815385 4.60068966,23.9704615 5.12758621,23.4433846 L9.03448276,19.5369231 L19.2206897,19.5369231 C19.6889655,19.5369231 20.0689655,19.0283077 20.0689655,18.4015385 L20.0689655,1.13538462 C20.0696552,0.508615385 19.6896552,3.68935651e-15 19.2213793,3.68935651e-15 L0.848275862,0 Z"></path></svg></div><p id="AswAsw">And so we have a simple REST API that can fetch and create resources! For more
+on Snap, check out the <a href="http://snapframework.com/docs">Snap documentation</a>, or visit <code>#snapframework</code> on
+<a href="http://freenode.net/">freenode</a>.</p>
+
+</div>
+<ul class="share-post-list">
+<li class="share-network-item">
+<a class="social-share-network social-twitter" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" href="https://twitter.com/share?text=A%20REST%20API%20with%20Haskell%20and%20Snap&amp;url=https://robots.thoughtbot.com/a-rest-api-with-haskell-and-snap"><img alt="Twitter" src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/twitter-1c76e0e598704d74bfe03d922e1b3cd8ac0dbdb57f434a52cbb5.svg" height="15" width="15">
+</a></li>
+<li class="share-network-item">
+<a class="social-share-network social-email" href="mailto:?body=A%20REST%20API%20with%20Haskell%20and%20Snap%20-%20https%3A%2F%2Frobots.thoughtbot.com%2F%2Fa-rest-api-with-haskell-and-snap&amp;subject=Check%20out%20this%20blog%20post%20by%20thoughtbot"><img alt="Email" src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/email-73feb6282fea7831aa8ee081923ef70fd67b11a88b94df48996a69.svg" height="10" width="16">
+</a></li>
+</ul>
+
+</article>
+<div class="promoted">
+</div>
+
+</section>
+</section>
+<section class="container etc">
+<div class="ad-book">
+<img alt="Maybe Haskell book cover" src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/cover.png">
+<p>
+Have you ever wanted to to program without <code>nil</code>?
+Learn about Haskell's <code>Maybe</code> data type
+in our new book
+<a href="http://maybe-haskell.com/?utm_source=thoughtbot&amp;utm_medium=blog&amp;utm_campaign=blog-footer-ads"><i>Maybe Haskell</i></a>
+to start living in a null-free world.
+You'll find this concept useful whether you program
+in Haskell, Scala, OCaml,
+or are a heavy user of Swift's <code>Optional</code>s.
+</p>
+</div>
+
+
+
+</section>
+<footer>
+<section id="universal-footer">
+<div class="wrap">
+<div class="footer-nav">
+<ul>
+<li class="title">
+Services
+</li>
+<li>
+<a href="https://thoughtbot.com/work">Consulting
+</a></li>
+<li>
+<a href="https://thoughtbot.com/workshops">Workshops
+</a></li>
+<li>
+<a href="https://thoughtbot.com/hire-us">Hire Us
+</a></li>
+</ul>
+<ul>
+<li class="title">
+Products
+</li>
+<li>
+<a href="https://formkeep.com/">FormKeep
+</a></li>
+<li>
+<a href="https://houndci.com/">Hound
+</a></li>
+<li>
+<a href="http://playroto.to/">Rototo
+</a></li>
+<li>
+<a href="http://troposweather.com/">Tropos
+</a></li>
+<li>
+<a href="https://upcase.com/">Upcase
+</a></li>
+</ul>
+<ul>
+<li class="title">
+Open Source
+</li>
+<li>
+<a href="https://github.com/thoughtbot/Argo">Argo
+</a></li>
+<li>
+<a href="http://bourbon.io/">Bourbon
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/capybara-webkit">Capybara Webkit
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/clearance">Clearance
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/dotfiles">Dotfiles
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/factory_girl">Factory Girl
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/laptop">Laptop
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/Runes">Runes
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot/suspenders">Suspenders
+</a></li>
+<li>
+<a href="https://github.com/thoughtbot">More...
+</a></li>
+</ul>
+<ul>
+<li class="title">
+Books
+</li>
+<li>
+<a href="http://backbonejsonrails.com/">Backbone.js on Rails
+</a></li>
+<li>
+<a href="http://designfortheweb.net/">Design for the Web
+</a></li>
+<li>
+<a href="http://geocodingonrails.com/">Geocoding on Rails
+</a></li>
+<li>
+<a href="http://goal-oriented-git.com/">Goal-Oriented Git
+</a></li>
+<li>
+<a href="http://iosonrails.net/">iOS on Rails
+</a></li>
+<li>
+<a href="http://maintaining-open-source.com/">Maintaining OSS
+</a></li>
+<li>
+<a href="http://playbook.thoughtbot.com/">Playbook
+</a></li>
+<li>
+<a href="http://rubyscience.com/">Ruby Science
+</a></li>
+<li>
+<a href="http://testingrailsbook.com/">Testing Rails
+</a></li>
+<li>
+<a href="http://write-a-roguelike.com/">Write a Roguelike
+</a></li>
+</ul>
+<ul>
+<li class="title">
+Podcasts
+</li>
+<li>
+<a href="http://bikeshed.fm/">The Bike Shed
+</a></li>
+<li>
+<a href="http://buildphase.fm/">Build Phase
+</a></li>
+<li>
+<a href="http://giantrobots.fm/">Giant Robots
+</a></li>
+<li>
+<a href="http://tentative.fm/">Tentative
+</a></li>
+</ul>
+</div>
+</div>
+</section>
+</footer>
+<div id="copyright-footer" role="contentinfo">
+<strong>© 2016 thoughtbot, inc.</strong>
+The design of a robot and thoughtbot are registered trademarks of
+thoughtbot, inc.
+</div>
+
+<script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/application-2539d90a109e357eda91b005fa53ca0ee61f95d2a25fd713f.js"></script>
+<script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/init.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    Carnival.init({
+      article_author: "Sid Raval",
+      article_selector: "article .post-body",
+      block_selector: ":scope > p, :scope > pre, :scope li",
+      onNewComment: function(comment) {
+        [].slice.call(comment.element.querySelectorAll("pre code")).map(
+          function(e) { hljs.highlightBlock(e); }
+        );
+      }
+    });
+  })
+</script>
+
+<script>
+  window.analytics.load("wperrhev8f")
+  window.analytics.page();
+</script>
+
+
+
+<div><link rel="stylesheet" href="A%20REST%20API%20with%20Haskell%20and%20Snap_files/autogen-4OcIrL-k.css">
+<script src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/autogen-E-aJoBrR.js"></script></div><div style="position: absolute; opacity: 0; z-index: -1; width: 1px; max-width: 1px; height: 1px; max-height: 1px; top: 0px; left: 0px;" id="GooglePlusOneButtonByPrettyToolsDiv"><iframe src="A%20REST%20API%20with%20Haskell%20and%20Snap_files/fastbutton.html" style="width: 1px; max-width: 1px; height: 1px; max-height: 1px;"></iframe></div></body></html>
